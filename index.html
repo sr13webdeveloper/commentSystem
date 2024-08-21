@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Comment System</title>
+    <style>
+        .comment-section {
+            margin: 20px;
+        }
+        .comment {
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .reply-button {
+            margin-top: 5px;
+            padding: 5px;
+            cursor: pointer;
+            color: #007bff;
+        }
+    </style>
+</head>
+<body>
+    <div class="comment-section">
+        <button id="comment-button">Comment</button>
+    </div>
+
+    <script>
+        document.getElementById('comment-button').addEventListener('click', function() {
+            let commentText = prompt('Enter your comment:');
+            if (commentText) {
+                createComment(commentText);
+            }
+        });
+
+        function createComment(text) {
+            let commentSection = document.querySelector('.comment-section');
+
+            let commentDiv = document.createElement('div');
+            commentDiv.className = 'comment';
+            commentDiv.textContent = text;
+
+            let replyButton = document.createElement('button');
+            replyButton.textContent = 'Reply';
+            replyButton.className = 'reply-button';
+            replyButton.addEventListener('click', function() {
+                let replyText = prompt('Enter your reply:');
+                if (replyText) {
+                    createComment(replyText, commentDiv);
+                }
+            });
+
+            commentDiv.appendChild(replyButton);
+            commentSection.appendChild(commentDiv);
+        }
+    </script>
+</body>
+</html>
